@@ -25,8 +25,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val viewModel: CategoriesViewModel = viewModel()
-                    viewModel.loadCategories()
-//                    viewModel.loadBooks("health")
+//                    viewModel.loadCategories()
+                    viewModel.loadBooks("health")
                     Greeting("Android")
                 }
             }

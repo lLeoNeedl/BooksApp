@@ -33,4 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
             return db
         }
     }
+
+    abstract fun categoriesDao(): CategoriesDao
+    abstract fun booksDao(): BooksDao
 }
