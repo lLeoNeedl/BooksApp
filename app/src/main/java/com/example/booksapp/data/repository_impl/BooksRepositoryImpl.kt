@@ -19,13 +19,18 @@ class BooksRepositoryImpl(application: Application) : BooksRepository {
 
     override suspend fun loadCategories(): List<CategoryItem> = coroutineScope {
         try {
-            val categoriesResponse = apiService.loadBestSellersCategoriesNames()
-            launch {
-                val entities = categoriesResponse?.categories?.map {
-                    mapper.mapCategoryDtoToEntity(it)
-                } ?: listOf()
-                db.categoriesDao().saveAllCategories(entities)
+            val categoriesResponse = try {
+                apiService.loadBestSellersCategoriesNames()
+            } catch (e: Exception) {
+                Log.e("BooksRepositoryImpl", e.message.toString())
+                null
             }
+
+            val entities = categoriesResponse?.categories?.map {
+                mapper.mapCategoryDtoToEntity(it)
+            }
+            entities?.let { db.categoriesDao().saveAllCategories(it) }
+
             categoriesResponse?.categories?.map { mapper.mapCategoryDtoToModel(it) }
                 ?: getCategoriesFromCache()
         } catch (e: Exception) {
@@ -36,13 +41,18 @@ class BooksRepositoryImpl(application: Application) : BooksRepository {
 
     override suspend fun loadBooksByCategory(categoryId: String): List<BookItem> = coroutineScope {
         try {
-            val booksResponse = apiService.loadBooksByCategory(categoryId)
-            launch {
-                val entities = booksResponse?.categoryWithBooks?.books?.map {
-                    mapper.mapBookItemDtoToEntity(it, categoryId)
-                } ?: listOf()
-                db.booksDao().saveBooks(entities)
+            val booksResponse = try {
+                apiService.loadBooksByCategory(categoryId)
+            } catch (e: Exception) {
+                Log.e("BooksRepositoryImpl", e.message.toString())
+                null
             }
+
+            val entities = booksResponse?.categoryWithBooks?.books?.map {
+                mapper.mapBookItemDtoToEntity(it, categoryId)
+            }
+            entities?.let { db.booksDao().saveBooks(it) }
+
             booksResponse?.categoryWithBooks?.books?.map {
                 mapper.mapBookItemDtoToModel(it)
             } ?: getBooksFromCache(categoryId)
