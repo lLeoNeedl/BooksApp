@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.booksapp.data.db.dao.BooksDao
+import com.example.booksapp.data.db.dao.CategoriesDao
 import com.example.booksapp.data.db.entities.BookEntity
 import com.example.booksapp.data.db.entities.CategoryEntity
 

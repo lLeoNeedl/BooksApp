@@ -11,13 +11,13 @@ interface ApiService {
     @GET("lists/names.json")
     suspend fun loadBestSellersCategoriesNames(
         @Query("api-key") apiKey: String = API_KEY
-    ): CategoriesNamesResponseDto
+    ): CategoriesNamesResponseDto?
 
     @GET("lists/{category}.json")
     suspend fun loadBooksByCategory(
         @Path("category") categoryId: String,
         @Query("api-key") apiKey: String = API_KEY
-    ): BooksResponseDto
+    ): BooksResponseDto?
 
     companion object {
         private const val API_KEY = "7jvKXG9UsNZbBgziiGONdU7P9DAZAliL"
