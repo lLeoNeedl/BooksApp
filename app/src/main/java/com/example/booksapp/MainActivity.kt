@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.booksapp.presentation.CategoriesViewModel
 import com.example.booksapp.ui.theme.BooksAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,6 +24,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val viewModel: CategoriesViewModel = viewModel()
+                    viewModel.loadCategories()
+//                    viewModel.loadBooks("health")
                     Greeting("Android")
                 }
             }
