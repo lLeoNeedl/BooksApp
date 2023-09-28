@@ -33,6 +33,7 @@ class CategoriesViewModel(application: Application): AndroidViewModel(applicatio
     }
 
     private suspend fun loadCategories() {
+        _categoriesFlow.value = CategoriesScreenState.Loading
         val result = loadCategoriesUseCase()
         _categoriesFlow.value = CategoriesScreenState.Loaded(result)
     }
