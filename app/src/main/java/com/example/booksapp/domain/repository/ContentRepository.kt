@@ -3,7 +3,7 @@ package com.example.booksapp.domain.repository
 import com.example.booksapp.domain.models.BookItem
 import com.example.booksapp.domain.models.CategoryItem
 
-interface BooksRepository {
+interface ContentRepository {
 
     suspend fun loadCategories(): List<CategoryItem>
 

@@ -7,7 +7,7 @@ import com.example.booksapp.data.network.dto.CategoryItemDto
 import com.example.booksapp.domain.models.BookItem
 import com.example.booksapp.domain.models.CategoryItem
 
-class BookItemsMapper {
+class ItemsMapper {
 
     fun mapCategoryDtoToEntity(dto: CategoryItemDto) = CategoryEntity(
         categoryId = dto.categoryId ?: DEFAULT_VALUE_STR,

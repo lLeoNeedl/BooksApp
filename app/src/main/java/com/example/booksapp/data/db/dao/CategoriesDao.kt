@@ -9,7 +9,7 @@ import com.example.booksapp.data.db.entities.CategoryEntity
 @Dao
 interface CategoriesDao {
 
-    @Query("SELECT * FROM categories ORDER BY publishedDate")
+    @Query("SELECT * FROM categories ORDER BY publishedDate DESC")
     suspend fun getAllCategories(): List<CategoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
