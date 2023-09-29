@@ -40,7 +40,10 @@ fun ScreenContainer() {
             CategoriesScreen(navigationState)
         },
         booksScreenContent = {
-            BooksScreen(categoryId = it)
+            BooksScreen(categoryId = it, navigationState)
+        },
+        webPageScreenContent = {
+            WebPage(url = it)
         }
     )
 
