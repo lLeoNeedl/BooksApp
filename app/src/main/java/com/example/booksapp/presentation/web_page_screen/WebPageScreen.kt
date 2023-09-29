@@ -1,19 +1,21 @@
-package com.example.booksapp.presentation
+package com.example.booksapp.presentation.web_page_screen
 
+import android.annotation.SuppressLint
 import android.webkit.WebView
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun WebPage(url: String) {
+fun WebPageScreen(url: String) {
     AndroidView(
         modifier = Modifier.fillMaxSize(),
         factory = { context ->
             val webView = WebView(context)
             webView.loadUrl(url)
-//            webView.settings.javaScriptEnabled = true
+            webView.settings.javaScriptEnabled = true
             webView
         }
     )

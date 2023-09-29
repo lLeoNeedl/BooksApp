@@ -1,7 +1,10 @@
 package com.example.booksapp.presentation.books_screen
 
 import android.app.Application
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,26 +15,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -42,7 +48,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.booksapp.R
 import com.example.booksapp.domain.models.BookItem
-import com.example.booksapp.presentation.WebPage
 import com.example.booksapp.presentation.navigation.NavigationState
 import com.example.booksapp.presentation.navigation.Screen
 
@@ -87,17 +92,38 @@ fun BooksScreen(categoryId: String, navigationState: NavigationState) {
 fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(4)
+        shape = RoundedCornerShape(4),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        )
     ) {
         Row {
-            AsyncImage(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .weight(1F),
-                contentScale = ContentScale.Crop,
-                model = bookItem.imageUrl,
-                contentDescription = stringResource(id = R.string.book_image)
-            )
+                    .weight(1F)
+            ) {
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                    model = bookItem.imageUrl,
+                    contentDescription = stringResource(id = R.string.content_description_book_image),
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Box(
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.background,
+                            shape = CircleShape
+                        )
+                        .size(64.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = bookItem.rank)
+                }
+            }
             Column(
                 modifier = Modifier
                     .weight(2F)
@@ -108,8 +134,7 @@ fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
                     text = bookItem.title,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.ExtraBold,
-                    fontFamily = FontFamily.SansSerif,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    fontFamily = FontFamily.SansSerif
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -117,33 +142,31 @@ fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
                         .fillMaxWidth(),
                     text = bookItem.description,
                     fontWeight = FontWeight.Light,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    lineHeight = 20.sp
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = buildAnnotatedString {
                         withStyle(SpanStyle(fontWeight = FontWeight.ExtraBold)) {
-                            append("Author: ")
+                            append(stringResource(R.string.text_author))
                         }
                         append(bookItem.author)
                     },
                     modifier = Modifier
                         .fillMaxWidth(),
-                    lineHeight = 20.sp,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    lineHeight = 20.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = buildAnnotatedString {
                         withStyle(SpanStyle(fontWeight = FontWeight.ExtraBold)) {
-                            append("Publisher: ")
+                            append(stringResource(R.string.text_publisher))
                         }
                         append(bookItem.author)
                     },
                     modifier = Modifier
                         .fillMaxWidth(),
-                    lineHeight = 20.sp,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    lineHeight = 20.sp
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -157,8 +180,7 @@ fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
                     text = bookItem.productUrl,
                     fontWeight = FontWeight.Light,
                     textDecoration = TextDecoration.Underline,
-                    lineHeight = 20.sp,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    lineHeight = 20.sp
                 )
             }
         }
