@@ -1,11 +1,9 @@
 package com.example.booksapp.presentation.categories_screen
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksapp.data.repository_impl.ContentRepositoryImpl
-import com.example.booksapp.domain.usecases.LoadBooksUseCase
 import com.example.booksapp.domain.usecases.LoadCategoriesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

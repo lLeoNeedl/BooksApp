@@ -2,7 +2,6 @@ package com.example.booksapp.data.db.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
 @Entity("books")
 data class BookEntity(
