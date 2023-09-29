@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -93,7 +94,10 @@ fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
             containerColor = MaterialTheme.colorScheme.secondaryContainer
         )
     ) {
-        Row {
+        Row(
+            modifier =
+            Modifier.padding(12.dp)
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -109,7 +113,6 @@ fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Box(
                     modifier = Modifier
-                        .padding(start = 8.dp)
                         .background(
                             color = MaterialTheme.colorScheme.background,
                             shape = CircleShape
@@ -120,10 +123,10 @@ fun BookInfoCard(bookItem: BookItem, navigationState: NavigationState) {
                     Text(text = bookItem.rank)
                 }
             }
+            Spacer(modifier = Modifier.width(12.dp))
             Column(
                 modifier = Modifier
                     .weight(2F)
-                    .padding(12.dp)
             ) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),

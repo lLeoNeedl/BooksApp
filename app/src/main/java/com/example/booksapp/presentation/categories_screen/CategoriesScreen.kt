@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -79,6 +80,9 @@ fun CategoryItem(categoryItem: CategoryItem, navigationState: NavigationState) {
             shape = RoundedCornerShape(12),
             elevation = CardDefaults.elevatedCardElevation(
                 defaultElevation = 4.dp
+            ),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer
             )
         ) {
             Column(
