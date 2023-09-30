@@ -1,10 +1,8 @@
 package com.example.booksapp.data.repository_impl
 
-import android.app.Application
 import android.util.Log
 import com.example.booksapp.data.db.AppDatabase
 import com.example.booksapp.data.mapper.ItemsMapper
-import com.example.booksapp.data.network.ApiFactory
 import com.example.booksapp.data.network.ApiService
 import com.example.booksapp.domain.models.BookItem
 import com.example.booksapp.domain.models.CategoryItem

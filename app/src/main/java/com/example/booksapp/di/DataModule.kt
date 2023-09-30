@@ -9,20 +9,21 @@ import com.example.booksapp.domain.repository.ContentRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 interface DataModule {
 
-    @ApplicationScope
-    @Binds
-    fun bindRepository(impl: ContentRepositoryImpl): ContentRepository
-
     companion object {
-        @ApplicationScope
+        @Singleton
         @Provides
         fun provideApiService(): ApiService = ApiFactory.apiService
 
-        @ApplicationScope
+        @Singleton
         @Provides
         fun provideDataBase(application: Application): AppDatabase =
             AppDatabase.getInstance(application)

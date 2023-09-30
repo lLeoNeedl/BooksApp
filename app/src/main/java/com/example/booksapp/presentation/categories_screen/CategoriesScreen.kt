@@ -29,17 +29,15 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.booksapp.R
 import com.example.booksapp.domain.models.CategoryItem
-import com.example.booksapp.presentation.getApplicationComponent
 import com.example.booksapp.presentation.navigation.NavigationState
 import com.example.booksapp.presentation.navigation.Screen
 
 @Composable
 fun CategoriesScreen(navigationState: NavigationState) {
-    val component = getApplicationComponent()
-    val viewModel: CategoriesViewModel = viewModel(factory = component.getViewModelFactory())
+    val viewModel: CategoriesViewModel = hiltViewModel()
     val screenState =
         viewModel.categoriesFlow.collectAsState(CategoriesScreenState.Initial)
     CategoriesScreenContent(

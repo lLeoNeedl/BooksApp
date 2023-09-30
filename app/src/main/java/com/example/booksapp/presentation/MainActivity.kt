@@ -14,7 +14,9 @@ import com.example.booksapp.presentation.navigation.NavigationGraph
 import com.example.booksapp.presentation.navigation.rememberNavigationState
 import com.example.booksapp.presentation.web_page_screen.WebPageScreen
 import com.example.booksapp.ui.theme.BooksAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
