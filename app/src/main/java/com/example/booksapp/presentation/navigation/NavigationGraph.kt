@@ -9,8 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.booksapp.presentation.books_screen.BooksViewModel
 
-private const val DEFAULT_VALUE_STR = ""
-
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
@@ -39,7 +37,7 @@ fun NavigationGraph(
                 }
             )
         ) {
-            val url = it.arguments?.getString(Screen.KEY_URL) ?: DEFAULT_VALUE_STR
+            val url = it.arguments?.getString(Screen.KEY_URL).orEmpty()
             webPageScreenContent(url)
         }
     }
