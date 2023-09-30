@@ -1,6 +1,5 @@
 package com.example.booksapp.presentation.books_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksapp.domain.usecases.LoadBooksUseCase
@@ -17,11 +16,8 @@ class BooksViewModel @Inject constructor(
         MutableStateFlow<BooksScreenState>(BooksScreenState.Initial)
     val booksFlow = _booksFlow.asStateFlow()
 
-    init {
-        _booksFlow.value = BooksScreenState.Loading
-    }
-
     fun loadBooks(categoryId: String) {
+        _booksFlow.value = BooksScreenState.Loading
         viewModelScope.launch {
             val books = loadBooksUseCase(categoryId)
             _booksFlow.value = BooksScreenState.Loaded(books)
