@@ -20,6 +20,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +40,19 @@ import com.example.booksapp.presentation.navigation.Screen
 fun CategoriesScreen(navigationState: NavigationState) {
     val component = getApplicationComponent()
     val viewModel: CategoriesViewModel = viewModel(factory = component.getViewModelFactory())
-    val screenState = viewModel.categoriesFlow.collectAsState(CategoriesScreenState.Initial)
+    val screenState =
+        viewModel.categoriesFlow.collectAsState(CategoriesScreenState.Initial)
+    CategoriesScreenContent(
+        screenState = screenState,
+        navigationState = navigationState
+    )
+}
+
+@Composable
+fun CategoriesScreenContent(
+    screenState: State<CategoriesScreenState>,
+    navigationState: NavigationState
+) {
     when (val stateValue = screenState.value) {
         is CategoriesScreenState.Loading -> {
             Box(
