@@ -19,14 +19,14 @@ class CategoriesViewModel @Inject constructor(
     val categoriesFlow = _categoriesFlow.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            loadCategories()
-        }
+        loadCategories()
     }
 
-    private suspend fun loadCategories() {
+    private fun loadCategories() {
         _categoriesFlow.value = CategoriesScreenState.Loading
-        val result = loadCategoriesUseCase()
-        _categoriesFlow.value = CategoriesScreenState.Loaded(result)
+        viewModelScope.launch {
+            val result = loadCategoriesUseCase()
+            _categoriesFlow.value = CategoriesScreenState.Loaded(result)
+        }
     }
 }

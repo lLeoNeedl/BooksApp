@@ -1,7 +1,6 @@
 package com.example.booksapp.data.db.entities
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 @Entity("books", primaryKeys = ["title", "categoryId"])
 data class BookEntity(
