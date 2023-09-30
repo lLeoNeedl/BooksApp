@@ -22,15 +22,11 @@ class BooksViewModel @Inject constructor(
     val booksFlow = _booksFlow.asStateFlow()
 
     private val categoryId by lazy {
-        savedStateHandle.get<String>(Screen.KEY_CATEGORY_ID) ?: DEFAULT_VALUE_STR
+        savedStateHandle.get<String>(Screen.KEY_CATEGORY_ID).orEmpty()
     }
 
     init {
         loadBooks(categoryId)
-    }
-
-    fun putCategoryId(categoryId: String) {
-        savedStateHandle[Screen.KEY_CATEGORY_ID] = categoryId
     }
 
     private fun loadBooks(categoryId: String) {
@@ -39,9 +35,5 @@ class BooksViewModel @Inject constructor(
             val books = loadBooksUseCase(categoryId)
             _booksFlow.value = BooksScreenState.Loaded(books)
         }
-    }
-
-    companion object {
-        private const val DEFAULT_VALUE_STR = ""
     }
 }

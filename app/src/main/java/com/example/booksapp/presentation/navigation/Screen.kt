@@ -3,7 +3,6 @@ package com.example.booksapp.presentation.navigation
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-
 sealed class Screen(
     val route: String
 ) {

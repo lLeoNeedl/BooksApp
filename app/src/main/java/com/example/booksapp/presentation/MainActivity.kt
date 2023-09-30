@@ -42,7 +42,7 @@ fun ScreenContainer() {
             CategoriesScreen(navigationState)
         },
         booksScreenContent = {
-            BooksScreen(categoryId = it, navigationState)
+            BooksScreen(viewModel = it, navigationState)
         },
         webPageScreenContent = {
             WebPageScreen(url = it)

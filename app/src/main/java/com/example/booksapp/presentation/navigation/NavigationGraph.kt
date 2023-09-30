@@ -1,11 +1,13 @@
 package com.example.booksapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.booksapp.presentation.books_screen.BooksViewModel
 
 private const val DEFAULT_VALUE_STR = ""
 
@@ -13,7 +15,7 @@ private const val DEFAULT_VALUE_STR = ""
 fun NavigationGraph(
     navController: NavHostController,
     categoriesScreenContent: @Composable () -> Unit,
-    booksScreenContent: @Composable (String) -> Unit,
+    booksScreenContent: @Composable (BooksViewModel) -> Unit,
     webPageScreenContent: @Composable (String) -> Unit
 ) {
     NavHost(
@@ -24,16 +26,10 @@ fun NavigationGraph(
             categoriesScreenContent()
         }
         composable(
-            route = Screen.BooksScreen.route,
-            arguments = listOf(
-                navArgument(Screen.KEY_CATEGORY_ID) {
-                    type = NavType.StringType
-                }
-            )
+            route = Screen.BooksScreen.route
         ) {
-            val categoryId = it.arguments?.getString(Screen.KEY_CATEGORY_ID)
-                ?: DEFAULT_VALUE_STR
-            booksScreenContent(categoryId)
+            val viewModel: BooksViewModel = hiltViewModel()
+            booksScreenContent(viewModel)
         }
         composable(
             route = Screen.WebPageScreen.route,

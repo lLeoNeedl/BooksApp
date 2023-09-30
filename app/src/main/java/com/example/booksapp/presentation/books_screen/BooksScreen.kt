@@ -13,15 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.booksapp.presentation.navigation.NavigationState
 
 @Composable
-fun BooksScreen(categoryId: String, navigationState: NavigationState) {
-
-    val viewModel: BooksViewModel = hiltViewModel<BooksViewModel>().apply {
-        putCategoryId(categoryId)
-    }
+fun BooksScreen(viewModel: BooksViewModel, navigationState: NavigationState) {
 
     val screenState = viewModel.booksFlow.collectAsState(BooksScreenState.Initial)
 
