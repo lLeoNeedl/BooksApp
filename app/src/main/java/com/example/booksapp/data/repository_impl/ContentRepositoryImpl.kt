@@ -5,16 +5,18 @@ import android.util.Log
 import com.example.booksapp.data.db.AppDatabase
 import com.example.booksapp.data.mapper.ItemsMapper
 import com.example.booksapp.data.network.ApiFactory
+import com.example.booksapp.data.network.ApiService
 import com.example.booksapp.domain.models.BookItem
 import com.example.booksapp.domain.models.CategoryItem
 import com.example.booksapp.domain.repository.ContentRepository
 import kotlinx.coroutines.coroutineScope
+import javax.inject.Inject
 
-class ContentRepositoryImpl(application: Application) : ContentRepository {
-
-    private val apiService = ApiFactory.apiService
-    private val db = AppDatabase.getInstance(application)
-    private val mapper = ItemsMapper()
+class ContentRepositoryImpl @Inject constructor(
+    private val apiService: ApiService,
+    private val db: AppDatabase,
+    private val mapper: ItemsMapper
+) : ContentRepository {
 
     override suspend fun loadCategories(): List<CategoryItem> = coroutineScope {
         try {

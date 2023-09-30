@@ -1,18 +1,16 @@
 package com.example.booksapp.presentation.categories_screen
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.booksapp.data.repository_impl.ContentRepositoryImpl
 import com.example.booksapp.domain.usecases.LoadCategoriesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CategoriesViewModel(application: Application): AndroidViewModel(application) {
-
-    private val repository = ContentRepositoryImpl(application)
-    private val loadCategoriesUseCase = LoadCategoriesUseCase(repository)
+class CategoriesViewModel @Inject constructor(
+    private val loadCategoriesUseCase: LoadCategoriesUseCase
+) : ViewModel() {
 
     private val _categoriesFlow =
         MutableStateFlow<CategoriesScreenState>(CategoriesScreenState.Initial)

@@ -31,12 +31,14 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.booksapp.R
 import com.example.booksapp.domain.models.CategoryItem
+import com.example.booksapp.presentation.getApplicationComponent
 import com.example.booksapp.presentation.navigation.NavigationState
 import com.example.booksapp.presentation.navigation.Screen
 
 @Composable
 fun CategoriesScreen(navigationState: NavigationState) {
-    val viewModel: CategoriesViewModel = viewModel()
+    val component = getApplicationComponent()
+    val viewModel: CategoriesViewModel = viewModel(factory = component.getViewModelFactory())
     val screenState = viewModel.categoriesFlow.collectAsState(CategoriesScreenState.Initial)
     when (val stateValue = screenState.value) {
         is CategoriesScreenState.Loading -> {
