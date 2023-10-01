@@ -5,41 +5,17 @@ import com.example.booksapp.data.db.AppDatabase
 import com.example.booksapp.data.mapper.ItemsMapper
 import com.example.booksapp.data.network.ApiService
 import com.example.booksapp.domain.models.BookItem
-import com.example.booksapp.domain.models.CategoryItem
-import com.example.booksapp.domain.repository.ContentRepository
-import kotlinx.coroutines.coroutineScope
+import com.example.booksapp.domain.repository.BooksRepository
 import javax.inject.Inject
 
-class ContentRepositoryImpl @Inject constructor(
+class BooksRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val db: AppDatabase,
     private val mapper: ItemsMapper
-) : ContentRepository {
+): BooksRepository {
 
-    override suspend fun loadCategories(): List<CategoryItem> = coroutineScope {
-        try {
-            val categoriesResponse = try {
-                apiService.loadBestSellersCategoriesNames()
-            } catch (e: Exception) {
-                Log.e("BooksRepositoryImpl", e.message.toString())
-                null
-            }
-
-            val entities = categoriesResponse?.categories?.map {
-                mapper.mapCategoryDtoToEntity(it)
-            }
-            entities?.let { db.categoriesDao().saveAllCategories(it) }
-
-            categoriesResponse?.categories?.map { mapper.mapCategoryDtoToModel(it) }
-                ?: getCategoriesFromCache()
-        } catch (e: Exception) {
-            Log.e("BooksRepositoryImpl", e.message.toString())
-            listOf()
-        }
-    }
-
-    override suspend fun loadBooksByCategory(categoryId: String): List<BookItem> = coroutineScope {
-        try {
+    override suspend fun loadBooksByCategory(categoryId: String): List<BookItem> {
+        return try {
             val booksResponse = try {
                 apiService.loadBooksByCategory(categoryId)
             } catch (e: Exception) {
@@ -58,13 +34,6 @@ class ContentRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             Log.e("BooksRepositoryImpl", e.message.toString())
             listOf()
-        }
-    }
-
-    private suspend fun getCategoriesFromCache(): List<CategoryItem> {
-        val entities = db.categoriesDao().getAllCategories()
-        return entities.map {
-            mapper.mapCategoryEntityToModel(it)
         }
     }
 

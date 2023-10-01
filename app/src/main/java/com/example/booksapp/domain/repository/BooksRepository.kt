@@ -1,11 +1,8 @@
 package com.example.booksapp.domain.repository
 
 import com.example.booksapp.domain.models.BookItem
-import com.example.booksapp.domain.models.CategoryItem
 
-interface ContentRepository {
-
-    suspend fun loadCategories(): List<CategoryItem>
+interface BooksRepository {
 
     suspend fun loadBooksByCategory(categoryId: String): List<BookItem>
 }
