@@ -2,8 +2,8 @@ package com.example.booksapp.data.mapper
 
 import com.example.booksapp.data.db.entities.BookEntity
 import com.example.booksapp.data.db.entities.CategoryEntity
-import com.example.booksapp.data.network.dto.BookItemDto
-import com.example.booksapp.data.network.dto.CategoryItemDto
+import com.example.booksapp.data.network.dto.books.BookItemDto
+import com.example.booksapp.data.network.dto.categories.CategoryItemDto
 import com.example.booksapp.domain.models.BookItem
 import com.example.booksapp.domain.models.CategoryItem
 import javax.inject.Inject

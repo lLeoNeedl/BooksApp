@@ -1,8 +1,8 @@
-package com.example.booksapp.data.network.dto
+package com.example.booksapp.data.network.dto.books
 
 import com.google.gson.annotations.SerializedName
 
 data class BooksResponseDto(
     @SerializedName("results")
-    val categoryWithBooks: CategoryWithBooksDto? = null
+    val categoryWithBooks: BooksListDto? = null
 )
